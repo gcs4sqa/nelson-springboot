@@ -5,7 +5,7 @@ import java.util.UUID;
 public class User {
 
     //User id
-    private final UUID userUid;
+    private UUID userUid;
     private final String firstName;
     private final String lastName;
     private final Gender gender;
@@ -21,7 +21,11 @@ public class User {
         this.age = age;
         this.email = email;
     }
+    
+    public void setUserUid(UUID uuid){
+        this.userUid = uuid;
 
+    }
 
     public UUID getUserUid() {
         return this.userUid;
