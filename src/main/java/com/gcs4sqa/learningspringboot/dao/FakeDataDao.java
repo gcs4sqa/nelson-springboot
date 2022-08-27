@@ -15,9 +15,10 @@ import com.gcs4sqa.learningspringboot.model.User.Gender;
 @Repository
 public class FakeDataDao implements UserDao {
 
-    private static Map<UUID, User> database;
+    private Map<UUID, User> database;
 
-    static {
+
+    public FakeDataDao() {
         database = new HashMap<>();
         UUID userUid = UUID.randomUUID();
         database.put(userUid, 
@@ -28,6 +29,8 @@ public class FakeDataDao implements UserDao {
         22, 
         "joe.jones@gmail.com"));
     }
+
+    
 
     @Override
     public List<User> selectAllUsers() {

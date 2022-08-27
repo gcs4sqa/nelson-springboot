@@ -13,42 +13,18 @@ import static org.assertj.core.api.Assertions.assertThat;
 import com.gcs4sqa.learningspringboot.model.User;
 import com.gcs4sqa.learningspringboot.model.User.Gender;
 
+@SuppressWarnings("all")
 public class FakeDataDaoTest {
 
     private FakeDataDao fakeDataDao;
 
     @BeforeEach
     public void setup(){
-        System.out.println("setup");
-        
         fakeDataDao = new FakeDataDao();
-        System.out.println(fakeDataDao.selectAllUsers().size());
+        
     }
 
    
-
-    @Test
-    void testDeleteUserByUserUid() {
-        UUID joeUserUuid = fakeDataDao.selectAllUsers().get(0).getUserUid();
-        fakeDataDao.deleteUserByUserUid(joeUserUuid);
-        assertThat(fakeDataDao.selectUserByUserUid(joeUserUuid).isPresent()).isFalse();
-        assertThat(fakeDataDao.selectAllUsers()).isEmpty();
-
-    }
-
-    @Test
-    void testInsertUser() {
-        UUID userUuid = UUID.randomUUID();
-        User user = new User(userUuid, "Anna",
-         "montana", Gender.Female, 20, "anna.montana@gmail.com");
-        fakeDataDao.insertUser(userUuid, user);
-        assertThat(fakeDataDao.selectAllUsers()).hasSize(2);
-        Optional<User> userOptional = fakeDataDao.selectUserByUserUid(userUuid);
-         assertThat(userOptional.isPresent()).isTrue();
-         assertThat(userOptional.get()).isEqualToComparingFieldByField(user);
-
-
-    }
 
     @Test
     void testSelectAllUsers() {
@@ -102,8 +78,26 @@ public class FakeDataDaoTest {
          assertThat(fakeDataDao.selectAllUsers()).hasSize(1);
          assertThat(user.get()).isEqualToComparingFieldByField(newJoe);
 
+    }
 
+    @Test
+    void testDeleteUserByUserUid() {
+        UUID joeUserUuid = fakeDataDao.selectAllUsers().get(0).getUserUid();
+        fakeDataDao.deleteUserByUserUid(joeUserUuid);
+        assertThat(fakeDataDao.selectUserByUserUid(joeUserUuid).isPresent()).isFalse();
+        assertThat(fakeDataDao.selectAllUsers()).isEmpty();
 
+    }
+    @Test
+    void testInsertUser() {
+        UUID userUuid = UUID.randomUUID();
+        User user = new User(userUuid, "Anna",
+         "montana", Gender.Female, 20, "anna.montana@gmail.com");
+        fakeDataDao.insertUser(userUuid, user);
+        assertThat(fakeDataDao.selectAllUsers()).hasSize(2);
+        Optional<User> userOptional = fakeDataDao.selectUserByUserUid(userUuid);
+         assertThat(userOptional.isPresent()).isTrue();
+         assertThat(userOptional.get()).isEqualToComparingFieldByField(user);
 
 
     }
