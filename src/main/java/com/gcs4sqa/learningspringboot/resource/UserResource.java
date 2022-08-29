@@ -1,7 +1,6 @@
 package com.gcs4sqa.learningspringboot.resource;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +23,6 @@ import com.gcs4sqa.learningspringboot.service.UserService;
 public class UserResource {
 
     final UserService userService;
-    private int insertUser;
 
 
     @Autowired
