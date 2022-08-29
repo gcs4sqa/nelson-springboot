@@ -4,14 +4,13 @@ import java.util.UUID;
 
 public class User {
 
-    //User id
+    // User id
     private UUID userUid;
-    private final String firstName;
-    private final String lastName;
-    private final Gender gender;
-    private final Integer age;
-    private final String email;
-
+    private String firstName;
+    private String lastName;
+    private Gender gender;
+    private Integer age;
+    private String email;
 
     public User(UUID userUid, String firstName, String lastName, Gender gender, Integer age, String email) {
         this.userUid = userUid;
@@ -21,8 +20,11 @@ public class User {
         this.age = age;
         this.email = email;
     }
-    
-    public void setUserUid(UUID uuid){
+
+    public User() {
+    }
+
+    public void setUserUid(UUID uuid) {
         this.userUid = uuid;
 
     }
@@ -54,16 +56,14 @@ public class User {
     @Override
     public String toString() {
         return "{" +
-            " userUid='" + getUserUid() + "'" +
-            ", firstName='" + getFirstName() + "'" +
-            ", lastName='" + getLastName() + "'" +
-            ", gender='" + getGender() + "'" +
-            ", age='" + getAge() + "'" +
-            ", email='" + getEmail() + "'" +
-            "}";
+                " userUid='" + getUserUid() + "'" +
+                ", firstName='" + getFirstName() + "'" +
+                ", lastName='" + getLastName() + "'" +
+                ", gender='" + getGender() + "'" +
+                ", age='" + getAge() + "'" +
+                ", email='" + getEmail() + "'" +
+                "}";
     }
-
-
 
     public enum Gender {
         Male,
