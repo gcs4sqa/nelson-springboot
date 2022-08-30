@@ -5,12 +5,10 @@ package com.gcs4sqa.learningspringboot.service;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Stream;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.comparator.Comparators;
 
 import com.gcs4sqa.learningspringboot.dao.UserDao;
 import com.gcs4sqa.learningspringboot.model.User;
