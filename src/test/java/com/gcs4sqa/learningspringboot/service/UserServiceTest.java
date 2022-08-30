@@ -44,13 +44,13 @@ public class UserServiceTest<Users> {
     void testGetAllUsers() {
         UUID annaUuid = UUID.randomUUID();
         User anna = new User(annaUuid, "Anna",
-         "montana", Gender.Female, 20, "anna.montana@gmail.com");
+         "montana", Gender.FEMALE, 20, "anna.montana@gmail.com");
         
          ImmutableList<User> users = new ImmutableList.Builder<User>()
          .add(anna).build();
 
         given(fakeDataDao.selectAllUsers()).willReturn(users);
-        List<User> allUsers = userService.getAllUsers();
+        List<User> allUsers = userService.getAllUsers(Optional.empty());
 
         assertThat(allUsers).hasSize(1);
         User user = allUsers.get(0);
@@ -63,7 +63,7 @@ public class UserServiceTest<Users> {
     void testGetUser() {
         UUID annUuid = UUID.randomUUID();
         User anna = new User(annUuid, "Anna",
-        "montana", Gender.Female, 20, "anna.montana@gmail.com");
+        "montana", Gender.FEMALE, 20, "anna.montana@gmail.com");
 
         given(fakeDataDao.selectUserByUserUid(annUuid)).willReturn(Optional.of(anna));
 
@@ -81,7 +81,7 @@ public class UserServiceTest<Users> {
     @Test
     void testInsertUser() {
         User anna = new User(null, "Anna",
-        "montana", Gender.Female, 20, "anna.montana@gmail.com");
+        "montana", Gender.FEMALE, 20, "anna.montana@gmail.com");
 
         given(fakeDataDao.insertUser(any(UUID.class), eq(anna))).willReturn(1);
 
@@ -101,7 +101,7 @@ public class UserServiceTest<Users> {
     void testRemoveUser() {
         UUID annUuid = UUID.randomUUID();
         User anna = new User(annUuid, "Anna",
-        "montana", Gender.Female, 20, "anna.montana@gmail.com");
+        "montana", Gender.FEMALE, 20, "anna.montana@gmail.com");
 
         given(fakeDataDao.selectUserByUserUid(annUuid)).willReturn(Optional.of(anna));
         given(fakeDataDao.deleteUserByUserUid(annUuid)).willReturn(1);
@@ -121,7 +121,7 @@ public class UserServiceTest<Users> {
     void testUpDateUser() {
         UUID annUuid = UUID.randomUUID();
         User anna = new User(annUuid, "Anna",
-        "montana", Gender.Female, 20, "anna.montana@gmail.com");
+        "montana", Gender.FEMALE, 20, "anna.montana@gmail.com");
 
         given(fakeDataDao.selectUserByUserUid(annUuid)).willReturn(Optional.of(anna));
         given(fakeDataDao.upDateUser(anna)).willReturn(1);
@@ -147,7 +147,7 @@ public class UserServiceTest<Users> {
         assertThat(user.getAge()).isEqualTo(20);
         assertThat(user.getFirstName()).isEqualTo("Anna");
         assertThat(user.getLastName()).isEqualTo("montana");
-        assertThat(user.getGender()).isEqualTo(Gender.Female);
+        assertThat(user.getGender()).isEqualTo(Gender.FEMALE);
         assertThat(user.getEmail()).isEqualTo("anna.montana@gmail.com");
         assertThat(user.getUserUid()).isNotEqualTo(null);
         assertThat(user.getUserUid()).isInstanceOf(UUID.class);

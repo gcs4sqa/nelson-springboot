@@ -1,7 +1,10 @@
 package com.gcs4sqa.learningspringboot.resource;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
+
+import javax.ws.rs.QueryParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,8 +36,8 @@ public class UserResource {
     @RequestMapping(
         method = RequestMethod.GET
     )
-    public List<User> fetchUsers(){
-        return userService.getAllUsers();
+    public List<User> fetchUsers(@QueryParam("gender") String gender){
+        return userService.getAllUsers(Optional.ofNullable(gender));
         
     }
 

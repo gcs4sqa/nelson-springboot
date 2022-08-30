@@ -34,7 +34,7 @@ public class FakeDataDaoTest {
         assertThat(user.getAge()).isEqualTo(22);
         assertThat(user.getFirstName()).isEqualTo("Joe");
         assertThat(user.getLastName()).isEqualTo("Jones");
-        assertThat(user.getGender()).isEqualTo(Gender.Male);
+        assertThat(user.getGender()).isEqualTo(Gender.MALE);
         assertThat(user.getEmail()).isEqualTo("joe.jones@gmail.com");
         assertThat(user.getUserUid()).isNotEqualTo(null);
 
@@ -47,7 +47,7 @@ public class FakeDataDaoTest {
     void testSelectUserByUserUid() {
         UUID annaUuid = UUID.randomUUID();
         User anna = new User(annaUuid, "Anna",
-         "montana", Gender.Female, 20, "anna.montana@gmail.com");
+         "montana", Gender.FEMALE, 20, "anna.montana@gmail.com");
          fakeDataDao.insertUser(annaUuid, anna);
          assertThat(fakeDataDao.selectAllUsers()).hasSize(2);
          Optional<User> annaOptional = fakeDataDao.selectUserByUserUid(annaUuid);
@@ -71,7 +71,7 @@ public class FakeDataDaoTest {
 
         UUID joeUserUuid = fakeDataDao.selectAllUsers().get(0).getUserUid();
         User newJoe = new User(joeUserUuid, "Anna",
-         "montana", Gender.Female, 20, "anna.montana@gmail.com");
+         "montana", Gender.FEMALE, 20, "anna.montana@gmail.com");
          fakeDataDao.upDateUser(newJoe);
          Optional<User> user = fakeDataDao.selectUserByUserUid(joeUserUuid);
          assertThat(user.isPresent()).isTrue();
@@ -92,7 +92,7 @@ public class FakeDataDaoTest {
     void testInsertUser() {
         UUID userUuid = UUID.randomUUID();
         User user = new User(userUuid, "Anna",
-         "montana", Gender.Female, 20, "anna.montana@gmail.com");
+         "montana", Gender.FEMALE, 20, "anna.montana@gmail.com");
         fakeDataDao.insertUser(userUuid, user);
         assertThat(fakeDataDao.selectAllUsers()).hasSize(2);
         Optional<User> userOptional = fakeDataDao.selectUserByUserUid(userUuid);
