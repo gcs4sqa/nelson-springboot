@@ -55,11 +55,38 @@ public class UserResource {
     )
     public ResponseEntity<Integer> inserNewUser(@RequestBody User user){
         int result = userService.insertUser(user);
+        return getIntegerResponseEntity(result);
+        
+    }
+
+
+    @RequestMapping(
+        method = RequestMethod.PUT,
+        consumes = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<Integer> updateUser(@RequestBody User user){
+        int result = userService.upDateUser(user);
+        return getIntegerResponseEntity(result);
+
+    }
+
+    @RequestMapping(
+        method = RequestMethod.DELETE,
+        path = "{userUid}"
+    )
+    public ResponseEntity<Integer> deleteUser(@PathVariable("userUid") UUID userUid){
+        int result = userService.removeUser(userUid);
+        return getIntegerResponseEntity(result);
+
+    }
+
+    private ResponseEntity<Integer> getIntegerResponseEntity(int result){
+        
         if (result == 1){
             return ResponseEntity.ok().build();
         }
         return ResponseEntity.badRequest().build();
-        
+    
     }
     
 
