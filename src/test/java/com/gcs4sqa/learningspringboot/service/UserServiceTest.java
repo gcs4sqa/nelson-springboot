@@ -24,6 +24,7 @@ import com.gcs4sqa.learningspringboot.model.User.Gender;
 import com.google.common.collect.ImmutableList;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @SuppressWarnings("all")
 public class UserServiceTest<Users> {
@@ -54,10 +55,38 @@ public class UserServiceTest<Users> {
 
         assertThat(allUsers).hasSize(1);
         User user = allUsers.get(0);
-        assertUserFields(user);
+        assertAnnaFields(user);
     }
 
-    
+    @Test
+    void shoudGetAllUsersByGender(){
+        UUID annaUuid = UUID.randomUUID();
+        User anna = new User(annaUuid, "Anna",
+         "montana", Gender.FEMALE, 20, "anna.montana@gmail.com");
+
+         UUID joeUuid = UUID.randomUUID();
+        User joe = new User(joeUuid, "Joe",
+         "Jones", Gender.MALE, 25, "joe.jones@gmail.com");
+        
+         ImmutableList<User> users = new ImmutableList.Builder<User>()
+         .add(anna)
+         .add(joe)
+         .build();
+
+         given(fakeDataDao.selectAllUsers()).willReturn(users);
+
+         List<User> filteredUsers = userService.getAllUsers(Optional.of("female"));
+        assertThat(filteredUsers).hasSize(1);
+        assertAnnaFields(filteredUsers.get(0));
+
+    }
+
+    @Test
+    void shouldThrowExceptionForInvalidGender(){
+        assertThatThrownBy(() -> userService.getAllUsers(Optional.of("boy")))
+        .isInstanceOf(IllegalStateException.class)
+        .hasMessageContaining("Invalid gender");
+    }    
 
     @Test
     void testGetUser() {
@@ -71,7 +100,7 @@ public class UserServiceTest<Users> {
         
         assertThat(userOptional.isPresent()).isTrue();
         User user = userOptional.get();
-        assertUserFields(user);
+        assertAnnaFields(user);
 
     }
 
@@ -91,7 +120,7 @@ public class UserServiceTest<Users> {
         verify(fakeDataDao).insertUser(any(UUID.class), captor.capture());
         User user = captor.getValue();
 
-        assertUserFields(user);
+        assertAnnaFields(user);
         assertThat(insertResult).isEqualTo(1);
 
 
@@ -134,7 +163,7 @@ public class UserServiceTest<Users> {
         verify(fakeDataDao).upDateUser(captor.capture());
 
         User user = captor.getValue();
-        assertUserFields(user);
+        assertAnnaFields(user);
         assertThat(updateResult).isEqualTo(1);
 
 
@@ -143,7 +172,7 @@ public class UserServiceTest<Users> {
 
     }
 
-    private void assertUserFields(User user){
+    private void assertAnnaFields(User user){
         assertThat(user.getAge()).isEqualTo(20);
         assertThat(user.getFirstName()).isEqualTo("Anna");
         assertThat(user.getLastName()).isEqualTo("montana");

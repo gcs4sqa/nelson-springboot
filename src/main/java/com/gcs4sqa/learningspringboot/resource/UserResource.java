@@ -44,6 +44,7 @@ public class UserResource {
 
     @RequestMapping(
         method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE,
         path = "{userUid}"
     )
     public ResponseEntity<?> fetchUser(@PathVariable("userUid") UUID userUid){
@@ -54,7 +55,8 @@ public class UserResource {
 
     @RequestMapping(
         method = RequestMethod.POST,
-        consumes = MediaType.APPLICATION_JSON_VALUE
+        consumes = MediaType.APPLICATION_JSON_VALUE,
+        produces = MediaType.APPLICATION_JSON_VALUE
     )
     public ResponseEntity<Integer> inserNewUser(@RequestBody User user){
         int result = userService.insertUser(user);
@@ -65,7 +67,8 @@ public class UserResource {
 
     @RequestMapping(
         method = RequestMethod.PUT,
-        consumes = MediaType.APPLICATION_JSON_VALUE
+        consumes = MediaType.APPLICATION_JSON_VALUE,
+        produces = MediaType.APPLICATION_JSON_VALUE
     )
     public ResponseEntity<Integer> updateUser(@RequestBody User user){
         int result = userService.upDateUser(user);
@@ -75,6 +78,7 @@ public class UserResource {
 
     @RequestMapping(
         method = RequestMethod.DELETE,
+        produces = MediaType.APPLICATION_JSON_VALUE,
         path = "{userUid}"
     )
     public ResponseEntity<Integer> deleteUser(@PathVariable("userUid") UUID userUid){
