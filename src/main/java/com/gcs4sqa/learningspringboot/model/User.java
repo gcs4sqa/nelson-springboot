@@ -1,18 +1,28 @@
 package com.gcs4sqa.learningspringboot.model;
 
+import java.time.LocalDate;
 import java.util.UUID;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class User {
 
     // User id
-    private UUID userUid;
-    private String firstName;
-    private String lastName;
-    private Gender gender;
-    private Integer age;
-    private String email;
+    private final UUID userUid;
+    private final String firstName;
+    private final String lastName;
+    private final Gender gender;
+    private final Integer age;
+    private final String email;
 
-    public User(UUID userUid, String firstName, String lastName, Gender gender, Integer age, String email) {
+    public User(
+        @JsonProperty("userUid") UUID userUid, 
+        @JsonProperty("firstName") String firstName, 
+        @JsonProperty("lastName") String lastName, 
+        @JsonProperty("gender") Gender gender, 
+        @JsonProperty("age") Integer age, 
+        @JsonProperty("email") String email) {
         this.userUid = userUid;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -21,22 +31,17 @@ public class User {
         this.email = email;
     }
 
-    public User() {
-    }
-
-    public void setUserUid(UUID uuid) {
-        this.userUid = uuid;
-
-    }
-
+    @JsonProperty("id")
     public UUID getUserUid() {
         return this.userUid;
     }
 
+    @JsonIgnore
     public String getFirstName() {
         return this.firstName;
     }
 
+    @JsonIgnore
     public String getLastName() {
         return this.lastName;
     }
@@ -51,6 +56,19 @@ public class User {
 
     public String getEmail() {
         return this.email;
+    }
+
+    public String getFullName(){
+        return firstName + " " + lastName;
+    }
+
+    public int getDateOfBirth(){
+        return LocalDate.now().minusYears(age).getYear();
+    }
+
+    public static User newUser(UUID userUid, User user){
+        return new User(userUid, user.getFirstName(), user.getLastName(), 
+        user.gender, user.getAge(), user.getEmail());
     }
 
     @Override
