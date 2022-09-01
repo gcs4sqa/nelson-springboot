@@ -3,7 +3,6 @@ package com.gcs4sqa.learningspringboot.model;
 import java.time.LocalDate;
 import java.util.UUID;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class User {
@@ -36,12 +35,12 @@ public class User {
         return this.userUid;
     }
 
-    @JsonIgnore
+
     public String getFirstName() {
         return this.firstName;
     }
 
-    @JsonIgnore
+
     public String getLastName() {
         return this.lastName;
     }

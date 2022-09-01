@@ -19,10 +19,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.gcs4sqa.learningspringboot.model.User;
 import com.gcs4sqa.learningspringboot.service.UserService;
 
-@RestController
-@RequestMapping(
-    path = "/api/V1/users"
-)
+//@RestController
+//@RequestMapping(
+//    path = "/api/V1/users"
+//)
 public class UserResource {
 
     final UserService userService;

@@ -21,10 +21,10 @@ import com.gcs4sqa.learningspringboot.dao.FakeDataDao;
 import com.gcs4sqa.learningspringboot.model.User;
 import com.gcs4sqa.learningspringboot.model.User.Gender;
 
-import com.google.common.collect.ImmutableList;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
+import jersey.repackaged.com.google.common.collect.ImmutableList;
 
 @SuppressWarnings("all")
 public class UserServiceTest<Users> {
@@ -46,7 +46,7 @@ public class UserServiceTest<Users> {
         UUID annaUuid = UUID.randomUUID();
         User anna = new User(annaUuid, "Anna",
          "montana", Gender.FEMALE, 20, "anna.montana@gmail.com");
-        
+
          ImmutableList<User> users = new ImmutableList.Builder<User>()
          .add(anna).build();
 
