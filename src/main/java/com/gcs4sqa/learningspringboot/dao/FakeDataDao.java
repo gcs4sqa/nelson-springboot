@@ -1,13 +1,13 @@
 package com.gcs4sqa.learningspringboot.dao;
 
+import org.springframework.stereotype.Repository;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
-
-import org.springframework.stereotype.Repository;
 
 import com.gcs4sqa.learningspringboot.model.User;
 import com.gcs4sqa.learningspringboot.model.User.Gender;
@@ -17,20 +17,12 @@ public class FakeDataDao implements UserDao {
 
     private Map<UUID, User> database;
 
-
     public FakeDataDao() {
         database = new HashMap<>();
-        UUID userUid = UUID.randomUUID();
-        database.put(userUid, 
-        new User(userUid,
-        "Joe",
-        "Jones",
-        Gender.MALE,
-        22, 
-        "joe.jones@gmail.com"));
+        UUID joeUserUid = UUID.randomUUID();
+        database.put(joeUserUid, new User(joeUserUid, "Joe", "Jones",
+                Gender.MALE, 22, "joe.jones@gmail.com"));
     }
-
-    
 
     @Override
     public List<User> selectAllUsers() {
@@ -43,7 +35,7 @@ public class FakeDataDao implements UserDao {
     }
 
     @Override
-    public int upDateUser(User user) {
+    public int updateUser(User user) {
         database.put(user.getUserUid(), user);
         return 1;
     }
@@ -59,5 +51,4 @@ public class FakeDataDao implements UserDao {
         database.put(userUid, user);
         return 1;
     }
-    
 }

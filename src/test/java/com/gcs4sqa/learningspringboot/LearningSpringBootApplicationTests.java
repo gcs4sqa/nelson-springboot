@@ -1,7 +1,10 @@
 package com.gcs4sqa.learningspringboot;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+
 import org.springframework.boot.test.context.SpringBootTest;
+
+
 
 @SpringBootTest
 class LearningSpringBootApplicationTests {
