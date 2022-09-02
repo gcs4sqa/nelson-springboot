@@ -29,7 +29,7 @@ public interface UserResourceV1 {
     @POST
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
-    void inserNewUser(User user);
+    void insertNewUser(User user);
 
     @PUT
     @Consumes(APPLICATION_JSON)

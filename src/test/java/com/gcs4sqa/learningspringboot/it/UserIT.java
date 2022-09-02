@@ -1,10 +1,12 @@
-package com.gcs4sqa.learningspringboot;
+package com.gcs4sqa.learningspringboot.it;
 
 import com.gcs4sqa.learningspringboot.clientproxy.UserResourceV1;
 import com.gcs4sqa.learningspringboot.model.User;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -16,7 +18,7 @@ import java.util.UUID;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 public class UserIT {
@@ -47,7 +49,7 @@ public class UserIT {
 				User.Gender.MALE, 22, "joe.jones@gmail.com");
 
 		//WHEN
-		userResourceV1.inserNewUser(user);
+		userResourceV1.insertNewUser(user);
 
 		//THEN
 		User joe = userResourceV1.fetchUser(joeUserUid);
@@ -63,7 +65,7 @@ public class UserIT {
 				User.Gender.MALE, 22, "joe.jones@gmail.com");
 
 		//WHEN
-		userResourceV1.inserNewUser(user);
+		userResourceV1.insertNewUser(user);
 
 		//THEN
 		User joe = userResourceV1.fetchUser(joeUserUid);
@@ -88,7 +90,7 @@ public class UserIT {
 				User.Gender.MALE, 22, "joe.jones@gmail.com");
 
 		//WHEN
-		userResourceV1.inserNewUser(user);
+		userResourceV1.insertNewUser(user);
 
 		User updatedUser = new User(joeUserUid, "Alex", "Jones",
 				User.Gender.MALE, 55, "alex.jones@gmail.com");
@@ -109,7 +111,7 @@ public class UserIT {
 				User.Gender.MALE, 22, "joe.jones@gmail.com");
 
 		//WHEN
-		userResourceV1.inserNewUser(user);
+		userResourceV1.insertNewUser(user);
 
 		List<User> females = userResourceV1.fetchUsers(User.Gender.FEMALE.name());
 		assertThat(females).extracting("userUid").doesNotContain(user.getUserUid());

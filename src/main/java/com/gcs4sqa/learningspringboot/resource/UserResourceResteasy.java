@@ -60,6 +60,7 @@ public class UserResourceResteasy {
     @Produces(MediaType.APPLICATION_JSON)
     public void insertNewUser(@Valid User user) {
         userService.insertUser(user);
+
     }
 
     @PUT
